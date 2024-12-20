@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  website:
+    build: ./main
+    container_name: jarek-tech
+    restart: always
+    ports:
+      - 48000:8000
+    volumes:
+      - /var/log/JarekTech:/logs
+    command: gunicorn -w 2 -t 60 -b 0.0.0.0:8000 app:app
+
+#  tunnel:
+#    container_name: cloudflared-tunnel
+#    image: cloudflare/cloudflared:latest
+#    restart: always
+#    command: tunnel run
+#    environment:
+#      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
